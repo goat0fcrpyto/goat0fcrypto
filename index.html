@@ -3,47 +3,30 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-<!-- IMPACT VERIFICATION TAG -->
-<meta name='impact-site-verification' value='f79ebed8-9cb9-4af3-afc8-6049f58cdd32'>
-
 <title>GOAT OF CRYPTO</title>
-
-<!-- GOOGLE ANALYTICS -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TWDLN87C8R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-TWDLN87C8R');
-</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --bg:#000000;
-    --text:#ffffff;
-    --muted:rgba(255,255,255,0.70);
-    --muted-2:rgba(255,255,255,0.45);
-    --btn-bg:#111214;
-    --btn-border:rgba(255,255,255,0.12);
+    --bg:#000;
+    --text:#fff;
+    --card:#121214;
+    --border:rgba(255,255,255,0.12);
+    --hover:#1d1d20;
   }
 
-  html, body {
+  body {
     margin: 0;
-    padding: 0;
-    background: var(--bg) !important;
+    background: var(--bg);
     color: var(--text);
-    font-family: Montserrat, Arial, sans-serif;
-    height: 100%;
-    overflow-x: hidden;
+    font-family: Montserrat, sans-serif;
   }
 
   .topbar {
     width: 100%;
     height: 55px;
-    background: #000000;
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,97 +36,148 @@
     z-index: 50;
   }
 
-  .topbar .title {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+  .title { font-size: 15px; font-weight: 700; text-transform: uppercase; }
 
   .container {
-    width: 100%;
     text-align: center;
     padding-top: 90px;
     padding-bottom: 40px;
   }
 
-  .main {
-    font-size: 32px;
-    font-weight: 700;
-    margin-top: 5px;
-  }
+  .main { font-size: 32px; font-weight: 700; }
+  .sub { font-size: 18px; opacity: 0.75; margin-top: 5px; }
+  .quote { margin-top: 14px; opacity: 0.55; font-size: 15px; font-style: italic; }
 
-  .sub {
-    font-size: 18px;
-    opacity: 0.75;
-    margin-top: 5px;
-  }
-
-  .quote {
-    margin-top: 14px;
-    opacity: 0.55;
-    font-size: 15px;
-    font-style: italic;
-    line-height: 1.35;
-  }
-
-  .scan {
-    margin-top: 28px;
-    font-size: 24px;
-    opacity: 0.9;
-    letter-spacing: 0.6px;
-    height: 34px;
-  }
-
+  .scan { margin-top: 28px; font-size: 24px; opacity: 0.9; }
   .pulse {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ffffff;
-    margin-left: 10px;
-    animation: pulse 1s infinite;
+    width:8px;height:8px;border-radius:50%;background:#fff;margin-left:10px;
+    display:inline-block;animation:pulse 1s infinite;
+  }
+  @keyframes pulse{0%{opacity:1;transform:scale(.9);}50%{opacity:.3;transform:scale(1.4);}100%{opacity:1;transform:scale(.9);}}
+
+
+  /* ==========================================================
+        CTA ELEMENT FIXED TO ALWAYS BE ONE ROW
+     ========================================================== */
+  .cta-element {
+    display: inline-flex;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 40px;
+    transition: .25s;
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 
-  @keyframes pulse {
-    0% { transform: scale(0.9); opacity: 1; }
-    50% { transform: scale(1.6); opacity: 0.4; }
-    100% { transform: scale(0.9); opacity: 1; }
+  .cta-element:hover {
+    box-shadow: 0 0 22px rgba(255,255,255,0.05);
   }
 
-  .btn {
-    margin-top: 28px;
-    padding: 14px 38px;
-    font-size: 19px;
-    border-radius: 30px;
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
+  .cta-btn {
+    padding: 16px 36px;
+    font-size: 20px;
     font-weight: 600;
+    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: .25s;
+    letter-spacing: .3px;
+    white-space: nowrap;
   }
 
-  .btn:hover {
-    background: #1b1c20;
-    transform: translateY(-3px);
+  .cta-btn:hover {
+    background: var(--hover);
   }
 
-  .tiny {
-    margin-top: 14px;
-    opacity: 0.5;
-    font-size: 13px;
+  .divider {
+    width: 1px;
+    height: 34px;
+    background: rgba(255,255,255,0.12);
+    margin: 0 12px;
+  }
+
+  .flag-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 14px;
+    white-space: nowrap;
+  }
+
+  .flag {
+    width: 28px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.12);
+    opacity: .85;
+    transition: .2s;
+    cursor:pointer;
+  }
+  .flag:hover { opacity:1; }
+
+  .switch-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+    transition:.25s;
+  }
+
+  .switch-btn:hover {
+    background: var(--hover);
+    transform: rotate(18deg);
+  }
+
+  .switch-btn img {
+    width: 13px;
+    opacity: .9;
+    filter: brightness(0) invert(1);
+  }
+
+  @media (max-width: 500px){
+    .cta-element {
+      flex-direction: row !important;
+      padding: 10px 14px;
+      gap: 12px;
+    }
+
+    .divider {
+      display: block;
+    }
+
+    .cta-btn {
+      padding: 14px 24px;
+      font-size: 18px;
+    }
+
+    .flag-switch .flag {
+      width: 24px;
+      height: 17px;
+    }
+
+    .switch-btn {
+      width: 26px;
+      height: 26px;
+    }
   }
 
   .goat-bg {
     margin-top: 40px;
     width: 70vmin;
     max-width: 900px;
-    opacity: 1;
-    pointer-events: none;
   }
-</style>
 
+</style>
 </head>
 
 <body>
@@ -155,7 +189,6 @@
 <div class="container">
 
   <div class="main">The Market Rewards Action.</div>
-
   <div class="sub">Most hesitate. The market rewards the ones who move.</div>
 
   <div class="quote">
@@ -163,40 +196,96 @@
     to take risks will accomplish nothing.”
   </div>
 
-  <div class="scan" id="scanText">Fetching Signals<span class="pulse"></span></div>
+  <div class="scan" id="scanText">
+    Fetching Signals<span class="pulse"></span>
+  </div>
 
-  <button class="btn" onclick="window.location.href='https://partner.bybit.eu/b/goat0fcrypto';">
-    Enter → ByBit
-  </button>
+  <div class="cta-element">
 
-  <div class="tiny">High-trust access gateway</div>
+      <button id="mainCTA" class="cta-btn">
+        <span id="ctaLabel">Enter → ByBit</span>
+      </button>
 
-  <img src="GOAT.png" class="goat-bg" alt="GOAT Background">
+      <div class="divider"></div>
 
-  <div style="margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.45);">
-    Official partner access • Secure referral tracking
+      <div class="flag-switch">
+        <img id="flagEU" class="flag" src="Europe.png">
+
+        <div id="swapBtn" class="switch-btn">
+          <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png">
+        </div>
+
+        <img id="flagUS" class="flag" src="United States.png">
+      </div>
+
+  </div>
+
+  <div style="margin-top:14px; opacity:.45; font-size:13px;">
+    High-trust access gateway
+  </div>
+
+  <img src="GOAT.png" class="goat-bg">
+
+  <div style="margin-top:10px; font-size:13px; color:rgba(255,255,255,0.45);">
+    Official partner access · Secure referral tracking
+  </div>
+
+  <!-- ✅ NEW AFFILIATE DISCLAIMER -->
+  <div style="margin-top:6px; font-size:13px; color:rgba(255,255,255,0.45);">
+    This site may include affiliate links. I may earn a commission.
   </div>
 
 </div>
 
 <script>
-  const scanPphrases = [
-    "Fetching Signals…",
-    "Reading Order Flow…",
-    "Analyzing Volatility…",
-    "Checking Liquidity Pools…",
-    "Finalizing Feed…"
-  ];
+const scanPhrases=[
+  "Fetching Signals…",
+  "Reading Order Flow…",
+  "Analyzing Volatility…",
+  "Checking Liquidity Pools…",
+  "Finalizing Feed…"
+];
+let i=0;
+setInterval(()=>{
+  document.getElementById("scanText").childNodes[0].nodeValue=scanPhrases[i];
+  i=(i+1)%scanPhrases.length;
+},1400);
 
-  let i = 0;
-  setInterval(() => {
-    i = (i + 1) % scanPphrases.length;
-    document.getElementById("scanText").childNodes[0].nodeValue = scanPphrases[i];
-  }, 1400);
+let region="EU";
+const btn=document.getElementById("mainCTA");
+const ctaText=document.getElementById("ctaLabel");
+const flagEU=document.getElementById("flagEU");
+const flagUS=document.getElementById("flagUS");
+const swapBtn=document.getElementById("swapBtn");
+
+function updateRegion(){
+  if(region==="EU"){
+    ctaText.textContent="Enter → ByBit";
+    btn.onclick=()=>window.location.href="https://partner.bybit.eu/b/goat0fcrypto";
+  } else {
+    ctaText.textContent="Enter → TradingView";
+    btn.onclick=()=>window.location.href="https://de.tradingview.com/?aff_id=160735";
+  }
+}
+
+swapBtn.onclick=()=>{
+  const tmp=flagEU.src;
+  flagEU.src=flagUS.src;
+  flagUS.src=tmp;
+
+  region=region==="EU"?"US":"EU";
+  updateRegion();
+
+  swapBtn.style.transform="rotate(180deg)";
+  setTimeout(()=>swapBtn.style.transform="rotate(0deg)",300);
+};
+
+updateRegion();
 </script>
 
 </body>
 </html>
+
 
 
 
