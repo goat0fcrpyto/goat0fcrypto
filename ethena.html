@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The dollar that pays you, and what it costs — GOAT0FCRYPTO</title>
+<meta name="description" content="How Ethena's USDe generates yield, what has already been stress-tested, and where the real risk sits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#0C0C0C;
+    --raised:#141414;
+    --ink:#EFEFED;
+    --muted:#8C8C88;
+    --rule:#2A2A29;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Spectral", Georgia, serif;
+    font-size:18px;
+    font-weight:300;
+    line-height:1.72;
+  }
+  a{color:inherit;}
+  a:focus-visible{outline:1px solid var(--ink);outline-offset:4px;}
+
+  .wrap{max-width:1020px;margin:0 auto;padding:0 26px;}
+
+  .rule-mark{
+    display:inline-block;
+    font-family:"Barlow Condensed", "Arial Narrow", sans-serif;
+    font-weight:400;
+    letter-spacing:.14em;
+    line-height:1;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+
+  header{padding:30px 0 0;}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .masthead .rule-mark{font-size:19px;}
+  nav{display:flex;gap:26px;font-family:"Barlow Condensed",sans-serif;font-size:17px;letter-spacing:.08em;}
+  nav a{color:var(--muted);text-decoration:none;}
+  nav a:hover{color:var(--ink);}
+
+  /* ---------- article ---------- */
+  article{max-width:660px;margin:0 auto;padding:78px 0 40px;}
+  .kicker{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:15px;
+    letter-spacing:.12em;
+    color:var(--muted);
+    margin:0 0 18px;
+  }
+  article h1{
+    font-weight:300;
+    font-size:clamp(1.9rem,4.2vw,2.7rem);
+    line-height:1.22;
+    letter-spacing:-.01em;
+    margin:0 0 22px;
+  }
+  .standfirst{
+    color:var(--muted);
+    font-size:1.1rem;
+    margin:0 0 44px;
+    padding-bottom:34px;
+    border-bottom:1px solid var(--rule);
+  }
+  article h2{
+    font-weight:400;
+    font-size:1.45rem;
+    line-height:1.3;
+    margin:46px 0 16px;
+  }
+  article p{margin:0 0 22px;}
+  article ul{margin:0 0 22px;padding-left:1.1em;}
+  article li{margin-bottom:8px;}
+  article strong{font-weight:500;}
+  .endnote{
+    margin-top:52px;
+    padding-top:26px;
+    border-top:1px solid var(--rule);
+    color:var(--muted);
+    font-size:.9rem;
+    font-style:italic;
+  }
+
+  .backlink{
+    display:block;
+    max-width:660px;
+    margin:0 auto;
+    padding:0 0 70px;
+    font-family:"Barlow Condensed",sans-serif;
+    letter-spacing:.08em;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:16px;
+  }
+  .backlink:hover{color:var(--ink);}
+
+  footer{padding:44px 0 64px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem;}
+  footer p{margin:0 0 10px;max-width:64ch;}
+
+  @media (max-width:780px){
+    article{padding:52px 0 30px;}
+    body{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap masthead">
+    <a class="rule-mark" href="index.html">GOAT0FCRYPTO</a>
+    <nav>
+      <a href="index.html#writing">Writing</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <article>
+    <p class="kicker">PROTOCOL RESEARCH</p>
+    <h1>The dollar that pays you, and what it costs</h1>
+    <p class="standfirst">Ethena's USDe holds its peg without a bank and pays a yield while doing it. The mechanism works. The question is what you are actually being paid for.</p>
+
+    <p>USDe promises something that sounds impossible: a dollar that holds its value, earns a yield, and touches no bank. It has been running for over two years, it has survived conditions built to break it, and it currently sits somewhere between $4.5 and $6 billion in supply depending on which tracker you trust. It is also one of the least understood products in crypto, because most explanations either sell it or dismiss it.</p>
+
+    <p>This is neither. Here is how it makes money, and here is where it breaks.</p>
+
+    <h2>The trade underneath</h2>
+
+    <p>USDe is not backed by treasury bills like USDC, and it is not over-collateralised like DAI. It is backed by a position — specifically, a delta-neutral basis trade.</p>
+
+    <p>The protocol holds spot crypto collateral, mostly staked ETH and Bitcoin, and simultaneously shorts an equivalent notional in perpetual futures. If ETH drops 30 percent, the spot leg loses and the short leg gains by roughly the same amount. The dollar value of the pair stays flat. That flatness is the peg.</p>
+
+    <p>The yield comes from two places. The spot leg earns staking rewards. The short leg collects funding payments, because in crypto, perpetual futures traders are structurally long, and longs pay shorts to hold the position open. Ethena sits on the short side and collects that flow. Deposit USDe, receive sUSDe, and the yield accrues to you.</p>
+
+    <p>If you have ever run a cash-and-carry trade manually across an exchange and a spot venue, this will look familiar. Ethena's contribution is not the idea. It is the packaging — turning a position that requires margin management, exchange accounts and constant attention into a token you can hold in a wallet.</p>
+
+    <h2>Where the money actually comes from</h2>
+
+    <p>This matters more than most coverage admits. sUSDe yield is not a rate someone sets. It is not the Sky Savings Rate, which governance votes on, and it is not treasury interest, which the Fed sets. It is the price that leveraged longs are willing to pay to stay long.</p>
+
+    <p>That has two consequences.</p>
+
+    <p>The first is that yield is highest exactly when crypto is most euphoric. Bull market, everybody levered long, funding runs hot, sUSDe pays double digits. This is a good business.</p>
+
+    <p>The second is the uncomfortable one. Funding can go negative. In a sustained bear market, or after a violent liquidation cascade that flushes out the long side, shorts start paying longs. Ethena's collecting leg becomes a paying leg. The yield does not just fall to zero — the position begins to bleed.</p>
+
+    <p>Ethena holds a reserve fund for exactly this, which is the correct design. The question is only ever how big it is relative to what it insures. Recent estimates put it near one percent of TVL. That is enough to absorb a normal negative-funding stretch. It is not obviously enough to absorb a long one combined with heavy redemptions.</p>
+
+    <h2>What has already been tested</h2>
+
+    <p>Sceptics predicted USDe would fail on first contact with stress. It did not.</p>
+
+    <p>It held through a $1.4 billion exchange hack with reported exposure under $30 million, which is a point in favour of the off-exchange custody model — the collateral sits with custodians rather than on the exchange, and only margin moves. During the largest single-day liquidation event of 2025 it slipped to around $0.97 and recovered within hours. A brief depeg under those conditions is not a failure; it is a market maker running out of inventory faster than arbitrage can refill it.</p>
+
+    <p>So the architecture works. That is genuinely established, and anyone still arguing USDe is a Ponzi has not updated in two years.</p>
+
+    <p>What is not established is behaviour under a slow grind rather than a sharp shock. Every stress event so far has been fast and violent, and those resolve within a day. The scenario that has not yet been run is six months of negative funding while DeFi positions built on sUSDe unwind at the same time. That is the tail nobody has priced, because it has not happened.</p>
+
+    <h2>The reflexivity problem</h2>
+
+    <p>USDe's deepest risk is not in the trade. It is in what got built on top of it.</p>
+
+    <p>sUSDe became collateral. Lending markets accept it, looping strategies stack it, and structured products wrap it. Each layer takes the base yield and levers it. In good conditions that is efficient capital use. In bad conditions it is a chain of positions that all need to exit through the same door.</p>
+
+    <p>If sUSDe yield compresses toward zero, the levered strategies built on it stop working first. They unwind, which means redeeming USDe, which means Ethena closing hedges into a market that is already moving. The mechanism does not have to fail for this to hurt. It only has to become unprofitable while a lot of people are pointing the same way.</p>
+
+    <h2>What to actually watch</h2>
+
+    <p>If you hold USDe or anything built on it, three numbers tell you more than any price chart:</p>
+
+    <ul>
+      <li>Funding rates across the major perp venues — that is the revenue line.</li>
+      <li>Reserve fund size relative to supply — that is the buffer.</li>
+      <li>How much sUSDe sits as collateral in lending markets — that is the leverage stacked on top.</li>
+    </ul>
+
+    <p>None of this requires a view on whether Ethena succeeds. It requires knowing that you are holding a trade rather than a deposit, and that the trade has a season.</p>
+
+    <h2>The honest summary</h2>
+
+    <p>Ethena built something that works and explained it clearly, which is rarer than it should be. The peg mechanism is sound, the custody model has been tested, and the yield is real rather than emitted.</p>
+
+    <p>The catch is what the yield is. It is compensation for taking the short side of crypto's structural leverage demand. That pays well while the demand is there. It pays nothing, and eventually costs, when it is not.</p>
+
+    <p>Treat USDe as a dollar and you will be surprised at the wrong moment. Treat it as a position with a funding-rate dependency and a reserve fund smaller than the thing it insures, and you will be holding it with your eyes open.</p>
+
+    <p class="endnote">This is analysis, not investment advice. Figures reflect publicly available data at the time of writing and change continuously — verify current numbers before relying on them.</p>
+  </article>
+
+  <a class="backlink" href="index.html">← All writing</a>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Impressum / Legal notice:</strong> [Full name], [Street and number], [Postcode, town], Austria · hello@goat0fcrypto.com · Business activity: advertising and communication services</p>
+    <p>Everything on this site is information and opinion. It is not investment advice, and not a recommendation to buy or sell any financial instrument.</p>
+  </div>
+</footer>
+
+</body>
+</html>
