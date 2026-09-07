@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pendle's landing page, rewritten — GOAT0FCRYPTO</title>
+<meta name="description" content="An unsolicited rewrite: what Pendle's homepage says, what it leaves out, and what I would put there instead.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--ground:#0C0C0C;--raised:#141414;--ink:#EFEFED;--muted:#8C8C88;--rule:#2A2A29;}
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:"Spectral",Georgia,serif;font-size:18px;font-weight:300;line-height:1.72;}
+  a{color:inherit;}
+  a:focus-visible{outline:1px solid var(--ink);outline-offset:4px;}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 26px;}
+  .rule-mark{display:inline-block;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:400;letter-spacing:.14em;line-height:1;text-decoration:none;white-space:nowrap;}
+  header{padding:30px 0 0;}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .masthead .rule-mark{font-size:19px;}
+  nav{display:flex;gap:26px;font-family:"Barlow Condensed",sans-serif;font-size:17px;letter-spacing:.08em;}
+  nav a{color:var(--muted);text-decoration:none;}
+  nav a:hover{color:var(--ink);}
+
+  article{max-width:660px;margin:0 auto;padding:78px 0 40px;}
+  .kicker{font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.12em;color:var(--muted);margin:0 0 18px;}
+  article h1{font-weight:300;font-size:clamp(1.9rem,4.2vw,2.7rem);line-height:1.22;letter-spacing:-.01em;margin:0 0 22px;}
+  .standfirst{color:var(--muted);font-size:1.1rem;margin:0 0 44px;padding-bottom:34px;border-bottom:1px solid var(--rule);}
+  article h2{font-weight:400;font-size:1.35rem;line-height:1.3;margin:44px 0 14px;}
+  article h3{font-family:"Barlow Condensed",sans-serif;font-weight:400;font-size:1.08rem;letter-spacing:.1em;color:var(--muted);margin:32px 0 12px;}
+  article p{margin:0 0 22px;}
+  article ul{margin:0 0 22px;padding-left:1.1em;}
+  article li{margin-bottom:10px;}
+  article strong{font-weight:500;}
+
+  .panel{background:var(--raised);padding:26px 28px;margin:0 0 22px;}
+  .panel p:last-child{margin-bottom:0;}
+  .panel .label{font-family:"Barlow Condensed",sans-serif;letter-spacing:.12em;font-size:14px;color:var(--muted);margin:0 0 14px;}
+  .panel .hed{font-size:1.3rem;line-height:1.32;margin:0 0 12px;}
+
+  .endnote{margin-top:52px;padding-top:26px;border-top:1px solid var(--rule);color:var(--muted);font-size:.9rem;font-style:italic;}
+  .backlink{display:block;max-width:660px;margin:0 auto;padding:0 0 70px;font-family:"Barlow Condensed",sans-serif;letter-spacing:.08em;color:var(--muted);text-decoration:none;font-size:16px;}
+  .backlink:hover{color:var(--ink);}
+  footer{padding:44px 0 64px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem;}
+  footer p{margin:0 0 10px;max-width:64ch;}
+  @media (max-width:780px){article{padding:52px 0 30px;}body{font-size:17px;}.panel{padding:20px 18px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap masthead">
+    <a class="rule-mark" href="index.html">GOAT0FCRYPTO</a>
+    <nav>
+      <a href="index.html#writing">Writing</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <article>
+    <p class="kicker">PRODUCT COPY</p>
+    <h1>Pendle's landing page, rewritten</h1>
+    <p class="standfirst">Pendle built the largest yield-trading venue in crypto. Its homepage never says what yield trading is. Here is what I would change, and why each change earns its place.</p>
+
+    <p>Pendle lets you separate a yield-bearing asset into two tradeable pieces: the deposit and the income it will produce. Once those trade independently, you can sell your future yield today for a known amount, or buy someone else's and take the other side. That is an interest-rate market, built on-chain, and it is a genuinely useful thing to have.</p>
+
+    <p>None of that sentence appears on pendle.finance.</p>
+
+    <h2>What the current page does</h2>
+
+    <p>The hero cycles a verb — trading, hedging, liberating, earning, leveraging, fixing — in front of the word Yield, then states that Pendle is <em>the world's largest crypto yield trading platform</em>. That is a size claim placed where the explanation should be. It is persuasive only to a reader who already knows what the category is; to everyone else it announces the scale of something they cannot picture.</p>
+
+    <p>Below it, two products are introduced as <strong>BOROS / MARGIN</strong> and <strong>V2 / SPOT</strong>. One is named after an internal version number and the other after a codename. A visitor has to hold two unfamiliar product names, two unfamiliar market types, and one unfamiliar category in their head simultaneously, before anything has been defined.</p>
+
+    <p>The supporting lines assume the same fluency. Trading spot yield, earning fixed yield and going long yield with leverage are all real capabilities, stated accurately — but each one presupposes that the reader knows yield is something you can hold a position in. That is exactly the idea the page has not yet introduced.</p>
+
+    <p>Then come metrics and a row of institutional logos. Both are strong assets, and both are answers to a question the reader has not been allowed to ask yet: <em>is this credible?</em> comes after <em>what is it?</em>, never before.</p>
+
+    <p>The cost is specific. Pendle's hardest competitor is not another protocol, it is the reader deciding this is not for them. A page that filters for people who already understand yield tokenization will keep converting the informed and quietly lose everyone the protocol has outgrown.</p>
+
+    <h2>The rewrite</h2>
+
+    <div class="panel">
+      <p class="label">BEFORE</p>
+      <p class="hed">Trading / Hedging / Liberating Yield</p>
+      <p>The world's largest crypto yield trading platform</p>
+    </div>
+
+    <div class="panel">
+      <p class="label">AFTER</p>
+      <p class="hed">Lock in your yield today. Or bet it goes higher.</p>
+      <p>Pendle turns the interest your crypto earns into something you can sell, buy, or hedge — on the largest yield market on-chain.</p>
+    </div>
+
+    <p>The headline names the two things a user can actually do, in the order they will care about them. Certainty first, because that is the larger audience; speculation second, because that is the louder one. The subheading keeps the size claim but now it lands on a reader who knows what is being sized.</p>
+
+    <h3>WHAT IT DOES</h3>
+
+    <p>Your staked ETH or stablecoin earns a variable rate. Nobody knows what it pays six months out — that uncertainty is the problem Pendle solves.</p>
+
+    <p>Deposit the asset and Pendle splits it in two. One token holds your deposit, the other holds every unit of yield it earns until a fixed maturity date. Sell the yield token and you have converted an unknown future rate into cash today. Buy one and you are taking the other side, paying now for whatever it produces later.</p>
+
+    <p>Both halves trade freely, so the market prices future yield the way bond markets price future interest. That price is the product.</p>
+
+    <h3>WHO IT IS FOR</h3>
+
+    <ul>
+      <li><strong>Anyone holding a yield-bearing asset</strong> — turn a variable rate into a fixed one, and know today what you will have earned by maturity.</li>
+      <li><strong>Traders with a view on rates</strong> — go long yield with leverage and no liquidation risk, or short it by selling forward.</li>
+      <li><strong>Funds and treasuries</strong> — hedge yield exposure the same way you would hedge a rate book anywhere else.</li>
+      <li><strong>Protocols and issuers</strong> — give your own yield-bearing token a market where its future rate can be priced.</li>
+    </ul>
+
+    <h3>WHAT IT COSTS AND WHAT THE RISK IS</h3>
+
+    <p>Fixed yield is fixed only if you hold to maturity; exiting early means selling at whatever the market pays that day. Buying yield can go to zero — if the underlying rate falls below what you paid, that is the loss, and it is capped at your entry. Every position sits in smart contracts and inherits the risk of the asset underneath it. Fees and current rates for each market are shown before you trade.</p>
+
+    <p>Most crypto homepages skip this section. It is the fastest trust you can buy: a reader who finds the risks stated plainly stops searching for what you are hiding.</p>
+
+    <h2>Why these changes</h2>
+
+    <ul>
+      <li><strong>Define before you scale.</strong> The size claim survives — it just moves behind the definition, where it persuades instead of confusing.</li>
+      <li><strong>Name products by what they do.</strong> V2 and Boros are internal names. On a homepage they become "spot yield" and "leveraged yield" first; the brand names can live on the product pages where a committed reader will meet them.</li>
+      <li><strong>Lead with the user's situation.</strong> "Your staked ETH earns a variable rate" puts the reader in the scene by the first line. Category-level abstraction never does that.</li>
+      <li><strong>Add the risk section.</strong> Its absence is conspicuous to exactly the sophisticated audience Pendle wants.</li>
+    </ul>
+
+    <p>What I would not change: the rotating verb animation and the institutional logos. The animation is a genuine piece of brand personality, and the logos are earned proof. Both work — they just need a reader who has been told what they are looking at.</p>
+
+    <p class="endnote">An unsolicited rewrite, produced as a writing sample. Not affiliated with Pendle, not commissioned by them, and not investment advice. Quoted lines reflect pendle.finance as of September 2026.</p>
+  </article>
+
+  <a class="backlink" href="index.html">← All writing</a>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Impressum / Legal notice:</strong> [Full name], [Street and number], [Postcode, town], Austria · hello@goat0fcrypto.com · Business activity: advertising and communication services</p>
+    <p>Everything on this site is information and opinion. It is not investment advice, and not a recommendation to buy or sell any financial instrument.</p>
+  </div>
+</footer>
+
+</body>
+</html>
