@@ -58,26 +58,34 @@
   .masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
   .masthead .rule-mark{font-size:19px;}
 
-  /* ---------- blurred logo backdrop ---------- */
+  /* ---------- blurred logo backdrop ----------
+     The PNG has black baked into its background. mix-blend-mode:screen
+     makes pure black transparent, so only the goat's lighter strokes
+     show and no rectangle edge appears against the page colour. */
   .backdrop{
     position:fixed;
     inset:0;
-    z-index:-1;
+    z-index:0;
     pointer-events:none;
     background-image:url("goat0fcrypto.png");
     background-repeat:no-repeat;
     background-position:center 46%;
     background-size:auto 90vh;
     filter:blur(18px) saturate(0);
-    opacity:.58;
+    mix-blend-mode:screen;
+    opacity:.5;
   }
-  :root[data-theme="light"] .backdrop{opacity:.06;filter:blur(18px) saturate(0) invert(1);}
+  :root[data-theme="light"] .backdrop{
+    mix-blend-mode:multiply;
+    filter:blur(18px) saturate(0) invert(1);
+    opacity:.08;
+  }
+
+  /* keep all content above the backdrop */
+  header, main, footer{position:relative;z-index:1;}
 
   @media (max-width:780px){
-    .backdrop{background-size:auto 40vh;background-position:center 30%;opacity:.11;}
-  }
-  @media (prefers-reduced-motion:no-preference){
-    .backdrop{will-change:auto;}
+    .backdrop{background-size:auto 48vh;background-position:center 30%;opacity:.4;}
   }
   nav{display:flex;gap:26px;font-family:"Barlow Condensed",sans-serif;font-size:17px;letter-spacing:.08em;}
   nav a{color:var(--muted);text-decoration:none;}
@@ -135,6 +143,9 @@
   }
   .services p{margin:0;color:var(--muted);font-size:.95rem;}
 
+  /* ---------- affiliate note ---------- */
+  .affiliate-note{margin:0;color:var(--muted);max-width:64ch;font-size:.95rem;}
+
   /* ---------- contact ---------- */
   .contact{background:var(--raised);padding:48px 42px;}
   .contact h2{font-weight:300;font-size:1.75rem;margin:0 0 10px;}
@@ -181,27 +192,27 @@
     <section id="writing">
       <h2 class="sec-head"><span class="rule-mark">SELECTED WORK</span></h2>
 
-      <a class="piece" href="ethena.html">
+      <a class="piece" href="#">
         <span class="kind">PROTOCOL RESEARCH</span>
         <div>
-          <h3>The dollar that pays you, and what it costs</h3>
-          <p>How Ethena's USDe generates yield, what has already been stress-tested, and where the real risk sits.</p>
+          <h3>Title of your first research piece</h3>
+          <p>One line on what it examines and what a reader walks away with. Roughly 1,000 words on mechanics and risk rather than price prediction.</p>
         </div>
       </a>
 
-      <a class="piece" href="newsletter.html">
+      <a class="piece" href="#">
         <span class="kind">NEWSLETTER</span>
         <div>
-          <h3>The unlock nobody claimed</h3>
-          <p>A hawkish jobs print the market shrugged off, an $820 million unlock that mostly wasn't, and what both say about who is driving this rally.</p>
+          <h3>Title of the sample issue</h3>
+          <p>A weekly read: three observations and one thesis. Shows format, voice, and that the thing ships on schedule.</p>
         </div>
       </a>
 
-      <a class="piece" href="product-copy.html">
+      <a class="piece" href="#">
         <span class="kind">PRODUCT COPY</span>
         <div>
-          <h3>Pendle's landing page, rewritten</h3>
-          <p>The largest yield-trading venue in crypto has a homepage that never explains what yield trading is. A line-by-line rewrite.</p>
+          <h3>Title of the landing page or docs rewrite</h3>
+          <p>An existing product explained again — what it does, who it's for, and why it beats the alternative, in language a newcomer can follow.</p>
         </div>
       </a>
     </section>
@@ -224,6 +235,11 @@
       </div>
     </section>
 
+    <section id="affiliates">
+      <h2 class="sec-head"><span class="rule-mark">AFFILIATE PARTNERSHIPS</span></h2>
+      <p class="affiliate-note">I take part in the affiliate programmes of TradingView, Kraken and eToro. If you sign up through a link of mine elsewhere, I may earn a commission at no extra cost to you. Nothing I write here is paid for by them, and none of it is a recommendation to open an account.</p>
+    </section>
+
     <section id="contact">
       <div class="contact">
         <h2>Got something to write?</h2>
@@ -237,7 +253,7 @@
 
 <footer>
   <div class="wrap">
-    <p><strong>Impressum / Legal notice:</strong> Jan Sommer, Hofäckerweg 01, 8434 Tillmitsch, Austria · hello@goat0fcrypto.com · Business activity: advertising and communication services</p>
+    <p><strong>Impressum / Legal notice:</strong> [Full name], [Street and number], [Postcode, town], Austria · hello@goat0fcrypto.com · Business activity: advertising and communication services</p>
     <p>Everything on this site is information and opinion. It is not investment advice, and not a recommendation to buy or sell any financial instrument.</p>
   </div>
 </footer>
