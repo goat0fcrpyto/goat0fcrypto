@@ -1,269 +1,246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GOAT OF CRYPTO</title>
-
-<!-- ============================
-     GOOGLE ANALYTICS (GA4)
-     Measurement ID: G-TWDLN87C8R
-=============================== -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TWDLN87C8R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TWDLN87C8R');
-</script>
-<!-- END GA4 -->
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOAT0FCRYPTO — Crypto research &amp; writing</title>
+<meta name="description" content="Research, newsletters and product copy for crypto and Web3 teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#000;
-    --text:#fff;
-    --card:#121214;
-    --border:rgba(255,255,255,0.12);
-    --hover:#1d1d20;
+    --ground:#0C0C0C;
+    --raised:#141414;
+    --ink:#EFEFED;
+    --muted:#8C8C88;
+    --rule:#2A2A29;
+    --hair:#EFEFED;
+  }
+  :root[data-theme="light"]{
+    --ground:#F2F1EE;
+    --raised:#E7E6E2;
+    --ink:#121212;
+    --muted:#63635F;
+    --rule:#C9C8C3;
+    --hair:#121212;
   }
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: Montserrat, sans-serif;
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Spectral", Georgia, serif;
+    font-size:17px;
+    font-weight:300;
+    line-height:1.68;
+  }
+  a{color:inherit;}
+  a:focus-visible{outline:1px solid var(--ink);outline-offset:4px;}
+  img{max-width:100%;}
+
+  .wrap{max-width:1020px;margin:0 auto;padding:0 26px;}
+
+  /* ---------- wordmark / section labels ---------- */
+  .rule-mark{
+    display:inline-block;
+    font-family:"Barlow Condensed", "Arial Narrow", sans-serif;
+    font-weight:400;
+    letter-spacing:.14em;
+    line-height:1;
+    text-decoration:none;
+    white-space:nowrap;
   }
 
-  .topbar {
-    width: 100%;
-    height: 55px;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    position: fixed;
-    top: 0;
-    z-index: 50;
+  header{padding:30px 0 0;}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .masthead .rule-mark{font-size:19px;}
+
+  /* ---------- blurred logo backdrop ---------- */
+  .backdrop{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background-image:url("goat0fcrypto.png");
+    background-repeat:no-repeat;
+    background-position:center 46%;
+    background-size:auto 90vh;
+    filter:blur(18px) saturate(0);
+    opacity:.58;
   }
+  :root[data-theme="light"] .backdrop{opacity:.06;filter:blur(18px) saturate(0) invert(1);}
 
-  .title { font-size: 15px; font-weight: 700; text-transform: uppercase; }
-
-  .container {
-    text-align: center;
-    padding-top: 90px;
-    padding-bottom: 40px;
+  @media (max-width:780px){
+    .backdrop{background-size:auto 40vh;background-position:center 30%;opacity:.11;}
   }
-
-  .main { font-size: 32px; font-weight: 700; }
-  .sub { font-size: 18px; opacity: 0.75; margin-top: 5px; }
-  .quote { margin-top: 14px; opacity: 0.55; font-size: 15px; font-style: italic; }
-
-  .scan { margin-top: 28px; font-size: 24px; opacity: 0.9; }
-  .pulse {
-    width:8px;height:8px;border-radius:50%;background:#fff;margin-left:10px;
-    display:inline-block;animation:pulse 1s infinite;
+  @media (prefers-reduced-motion:no-preference){
+    .backdrop{will-change:auto;}
   }
-  @keyframes pulse{0%{opacity:1;transform:scale(.9);}50%{opacity:.3;transform:scale(1.4);}100%{opacity:1;transform:scale(.9);}}
+  nav{display:flex;gap:26px;font-family:"Barlow Condensed",sans-serif;font-size:17px;letter-spacing:.08em;}
+  nav a{color:var(--muted);text-decoration:none;}
+  nav a:hover{color:var(--ink);}
 
-
-  /* ==========================================================
-        CTA ELEMENT — COMPACT MOBILE-FRIENDLY VERSION
-     ========================================================== */
-  .cta-element {
-    display: inline-flex;
-    align-items: center;
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 0 10px;
-    border-radius: 14px;
-    overflow: hidden;
-    margin-top: 40px;
-    transition: .25s;
-    gap: 8px;
-    white-space: nowrap;
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 88px;}
+  .hero h1{
+    font-weight:300;
+    font-size:clamp(2rem,4.6vw,3.05rem);
+    line-height:1.22;
+    letter-spacing:-.01em;
+    margin:0 0 30px;
+    max-width:19ch;
   }
+  .hero .lede{max-width:54ch;color:var(--muted);margin:0;}
+  .hero .lede + .lede{margin-top:16px;}
 
-  .cta-btn {
-    padding: 12px 18px;
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    letter-spacing: .3px;
-    white-space: nowrap;
+  /* ---------- sections ---------- */
+  section{padding:64px 0;border-top:1px solid var(--rule);}
+  .sec-head{margin:0 0 40px;}
+  .sec-head .rule-mark{font-size:15px;}
+
+  /* ---------- work ---------- */
+  .piece{
+    display:grid;
+    grid-template-columns:150px minmax(0,1fr);
+    gap:30px;
+    padding:24px 0;
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
   }
-
-  .cta-btn:hover { background: var(--hover); }
-
-  .divider {
-    width: 1px;
-    height: 28px;
-    background: rgba(255,255,255,0.12);
-    margin: 0 6px;
+  .piece:last-of-type{border-bottom:none;}
+  .kind{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:15px;
+    letter-spacing:.1em;
+    color:var(--muted);
+    padding-top:6px;
   }
+  .piece h3{font-weight:400;font-size:1.32rem;margin:0 0 8px;line-height:1.32;}
+  .piece:hover h3{text-decoration:underline;text-underline-offset:4px;}
+  .piece p{margin:0;color:var(--muted);max-width:60ch;font-size:.97rem;}
 
-  .flag-switch {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding-right: 6px;
-    white-space: nowrap;
+  /* ---------- services ---------- */
+  .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;}
+  .services h3{
+    font-family:"Barlow Condensed",sans-serif;
+    font-weight:400;
+    font-size:1.18rem;
+    letter-spacing:.06em;
+    margin:0 0 10px;
+    padding-bottom:9px;
+    border-bottom:1px solid var(--ink);
   }
+  .services p{margin:0;color:var(--muted);font-size:.95rem;}
 
-  .flag {
-    width: 22px;
-    height: 16px;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.12);
-    opacity: .85;
-    cursor:pointer;
+  /* ---------- contact ---------- */
+  .contact{background:var(--raised);padding:48px 42px;}
+  .contact h2{font-weight:300;font-size:1.75rem;margin:0 0 10px;}
+  .contact p{margin:0 0 26px;color:var(--muted);max-width:48ch;}
+  .contact a.mail{font-size:1.06rem;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:3px;}
+
+  /* ---------- footer ---------- */
+  footer{padding:44px 0 64px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem;}
+  footer p{margin:0 0 10px;max-width:64ch;}
+
+  @media (max-width:780px){
+    .hero{padding:64px 0 56px;}
+    .services{grid-template-columns:1fr;gap:28px;}
+    .piece{grid-template-columns:1fr;gap:8px;}
+    .kind{padding-top:0;}
+    .contact{padding:34px 24px;}
   }
-
-  .switch-btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--card);
-    border: 1px solid rgba(255,255,255,0.18);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor:pointer;
-    transition:.25s;
-  }
-
-  .switch-btn:hover {
-    background: var(--hover);
-    transform: rotate(18deg);
-  }
-
-  .switch-btn img {
-    width: 11px;
-    filter: brightness(0) invert(1);
-  }
-
-  .goat-bg {
-    margin-top: 40px;
-    width: 70vmin;
-    max-width: 900px;
-  }
-
 </style>
 </head>
-
 <body>
 
-<header class="topbar">
-  <div class="title">GOAT OF CRYPTO</div>
+<div class="backdrop" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap masthead">
+    <a class="rule-mark" href="/">GOAT0FCRYPTO</a>
+    <nav>
+      <a href="#writing">Writing</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
-<div class="container">
+<main>
+  <div class="wrap">
 
-  <div class="main">The Market Rewards Action.</div>
-  <div class="sub">Most hesitate. The market rewards the ones who move.</div>
+    <div class="hero">
+      <h1>Crypto research, written so people actually finish it.</h1>
+      <p class="lede">I write research, newsletters and product copy for crypto and Web3 teams — from someone who trades these markets, not someone who read about them last week.</p>
+      <p class="lede">No signals, no price calls. Just clear explanations of how something works, where the money comes from, and what can go wrong.</p>
+    </div>
 
-  <div class="quote">
-    “He who is not courageous enough<br>
-    to take risks will accomplish nothing.”
-  </div>
+    <section id="writing">
+      <h2 class="sec-head"><span class="rule-mark">SELECTED WORK</span></h2>
 
-  <div class="scan" id="scanText">
-    Fetching Signals<span class="pulse"></span>
-  </div>
-
-  <div class="cta-element">
-
-      <button id="mainCTA" class="cta-btn">
-        <span id="ctaLabel">Enter → ByBit</span>
-      </button>
-
-      <div class="divider"></div>
-
-      <div class="flag-switch">
-        <img id="flagEU" class="flag" src="Europe.png">
-
-        <div id="swapBtn" class="switch-btn">
-          <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png">
+      <a class="piece" href="#">
+        <span class="kind">PROTOCOL RESEARCH</span>
+        <div>
+          <h3>Title of your first research piece</h3>
+          <p>One line on what it examines and what a reader walks away with. Roughly 1,000 words on mechanics and risk rather than price prediction.</p>
         </div>
+      </a>
 
-        <img id="flagUS" class="flag" src="United States.png">
+      <a class="piece" href="#">
+        <span class="kind">NEWSLETTER</span>
+        <div>
+          <h3>Title of the sample issue</h3>
+          <p>A weekly read: three observations and one thesis. Shows format, voice, and that the thing ships on schedule.</p>
+        </div>
+      </a>
+
+      <a class="piece" href="#">
+        <span class="kind">PRODUCT COPY</span>
+        <div>
+          <h3>Title of the landing page or docs rewrite</h3>
+          <p>An existing product explained again — what it does, who it's for, and why it beats the alternative, in language a newcomer can follow.</p>
+        </div>
+      </a>
+    </section>
+
+    <section id="services">
+      <h2 class="sec-head"><span class="rule-mark">WHAT I DO</span></h2>
+      <div class="services">
+        <div>
+          <h3>Research</h3>
+          <p>Protocol deep dives, market reports, thesis pieces. Sourced, argued, and free of hype.</p>
+        </div>
+        <div>
+          <h3>Newsletters</h3>
+          <p>Recurring issues for your community or investors, including structure and an editorial calendar.</p>
+        </div>
+        <div>
+          <h3>Product &amp; site copy</h3>
+          <p>Landing pages, documentation, onboarding. So it's obvious what you built and why it matters.</p>
+        </div>
       </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <h2>Got something to write?</h2>
+        <p>Tell me what it is and when you need it. You'll get a scope and a price back within 24 hours.</p>
+        <a class="mail" href="mailto:hello@goat0fcrypto.com">hello@goat0fcrypto.com</a>
+      </div>
+    </section>
 
   </div>
+</main>
 
-  <div style="margin-top:14px; opacity:.45; font-size:13px;">
-    High-trust access gateway
+<footer>
+  <div class="wrap">
+    <p><strong>Impressum / Legal notice:</strong> [Full name], [Street and number], [Postcode, town], Austria · hello@goat0fcrypto.com · Business activity: advertising and communication services</p>
+    <p>Everything on this site is information and opinion. It is not investment advice, and not a recommendation to buy or sell any financial instrument.</p>
   </div>
-
-  <img src="GOAT.png" class="goat-bg">
-
-  <div style="margin-top:10px; font-size:13px; color:rgba(255,255,255,0.45);">
-    Official partner access · Secure referral tracking
-  </div>
-
-  <div style="margin-top:6px; font-size:13px; color:rgba(255,255,255,0.45);">
-    This site may include affiliate links. I may earn a commission.
-  </div>
-
-</div>
-
-<script>
-const scanPhrases=[
-  "Fetching Signals…",
-  "Reading Order Flow…",
-  "Analyzing Volatility…",
-  "Checking Liquidity Pools…",
-  "Finalizing Feed…"
-];
-let i=0;
-setInterval(()=>{
-  document.getElementById("scanText").childNodes[0].nodeValue=scanPhrases[i];
-  i=(i+1)%scanPhrases.length;
-},1400);
-
-let region="EU";
-const btn=document.getElementById("mainCTA");
-const ctaText=document.getElementById("ctaLabel");
-const flagEU=document.getElementById("flagEU");
-const flagUS=document.getElementById("flagUS");
-const swapBtn=document.getElementById("swapBtn");
-
-function updateRegion(){
-  if(region==="EU"){
-    ctaText.textContent="Entry for EU/ASIA";
-    btn.onclick=()=>window.location.href="https://partner.bybit.eu/b/goat0fcrypto";
-  } else {
-    ctaText.textContent="Entry for USA";
-    btn.onclick=()=>window.location.href="https://de.tradingview.com/?aff_id=160735";
-  }
-}
-
-swapBtn.onclick=()=>{
-  const tmp=flagEU.src;
-  flagEU.src=flagUS.src;
-  flagUS.src=tmp;
-
-  region=region==="EU"?"US":"EU";
-  updateRegion();
-
-  swapBtn.style.transform="rotate(180deg)";
-  setTimeout(()=>swapBtn.style.transform="rotate(0deg)",300);
-};
-
-updateRegion();
-</script>
+</footer>
 
 </body>
 </html>
-
-
-
-
-
-
-
