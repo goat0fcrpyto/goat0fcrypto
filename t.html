@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>—</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Spectral:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#0C0C0C; --raised:#141414; --sunk:#080808;
+    --ink:#EFEFED; --muted:#8C8C88; --rule:#2A2A29;
+    --done:#7FA88F; --warn:#B99A5B; --bad:#A8746B;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Spectral",Georgia,serif; font-size:16px; font-weight:300; line-height:1.6;
+  }
+  button,input,select,textarea{font-family:inherit;color:inherit;}
+  button{cursor:pointer;}
+  button:focus-visible,input:focus-visible{outline:1px solid var(--ink);outline-offset:2px;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px;}
+  .label{font-family:"Barlow Condensed",sans-serif;letter-spacing:.14em;font-size:13px;color:var(--muted);}
+  .hidden{display:none !important;}
+
+  /* ---------- gate ---------- */
+  #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px;}
+  .gatebox{width:100%;max-width:340px;}
+  .gatebox .mark{font-family:"Barlow Condensed",sans-serif;letter-spacing:.16em;font-size:15px;color:var(--muted);margin-bottom:26px;}
+  .gatebox input{
+    width:100%;background:var(--raised);border:1px solid var(--rule);color:var(--ink);
+    padding:12px 14px;font-size:1rem;letter-spacing:.1em;
+  }
+  .gatebox button{
+    width:100%;margin-top:10px;background:transparent;border:1px solid var(--muted);
+    padding:11px;font-family:"Barlow Condensed",sans-serif;letter-spacing:.1em;font-size:15px;
+  }
+  .gatebox button:hover{border-color:var(--ink);}
+  #gateMsg{margin-top:14px;font-size:.88rem;color:var(--muted);min-height:2.4em;}
+  #gateMsg.err{color:var(--bad);}
+
+  /* ---------- app ---------- */
+  header{padding:28px 0 0;}
+  .masthead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .masthead .mark{font-family:"Barlow Condensed",sans-serif;letter-spacing:.14em;font-size:18px;}
+  #status{font-family:"Barlow Condensed",sans-serif;letter-spacing:.08em;font-size:12px;color:var(--muted);}
+
+  .overall{padding:34px 0 26px;border-bottom:1px solid var(--rule);}
+  .overall h1{font-weight:300;font-size:1.7rem;margin:0 0 4px;line-height:1.2;}
+  .overall .sub{color:var(--muted);margin:0 0 20px;font-size:.95rem;}
+  .bar{height:5px;background:var(--sunk);position:relative;overflow:hidden;}
+  .bar span{position:absolute;inset:0 auto 0 0;background:var(--done);width:0;transition:width .3s ease;}
+  .barline{display:flex;justify-content:space-between;margin-top:8px;}
+
+  section{padding:30px 0;border-bottom:1px solid var(--rule);}
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px;}
+  .sechead h2{font-family:"Barlow Condensed",sans-serif;font-weight:400;letter-spacing:.12em;font-size:1rem;margin:0;}
+
+  .counters{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .counter{background:var(--raised);padding:14px;}
+  .counter .n{font-family:"Barlow Condensed",sans-serif;font-size:2rem;line-height:1;margin:6px 0 3px;}
+  .counter .goal{color:var(--muted);font-size:.8rem;}
+  .btns{display:flex;gap:5px;margin-top:11px;}
+  .btns button{
+    flex:1;background:transparent;border:1px solid var(--rule);padding:5px 0;
+    font-family:"Barlow Condensed",sans-serif;font-size:14px;
+  }
+  .btns button:hover{border-color:var(--muted);}
+  .ratio{margin-top:14px;color:var(--muted);font-size:.88rem;}
+
+  /* leads table */
+  .leadform{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
+  .leadform input{background:var(--raised);border:1px solid var(--rule);padding:8px 10px;font-size:.93rem;}
+  .leadform input.nm{flex:1;min-width:130px;}
+  .leadform input.ch{width:120px;}
+  .leadform button{background:transparent;border:1px solid var(--muted);padding:8px 15px;font-family:"Barlow Condensed",sans-serif;letter-spacing:.06em;}
+  .lead{display:grid;grid-template-columns:1fr auto auto auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule);font-size:.94rem;}
+  .lead .meta{color:var(--muted);font-size:.8rem;display:block;}
+  .lead select{background:var(--raised);border:1px solid var(--rule);padding:4px 6px;font-size:.82rem;}
+  .lead .due{font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.04em;color:var(--muted);white-space:nowrap;}
+  .lead .due.now{color:var(--warn);}
+  .lead .del{background:none;border:none;color:var(--muted);font-size:15px;padding:0 3px;}
+  .lead .del:hover{color:var(--ink);}
+  .empty{color:var(--muted);font-size:.9rem;padding:9px 0;}
+
+  /* jobs */
+  .jobform{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
+  .jobform input{background:var(--raised);border:1px solid var(--rule);padding:8px 10px;font-size:.93rem;}
+  .jobform input.cl{flex:1;min-width:130px;}
+  .jobform input.am{width:90px;}
+  .jobform button{background:transparent;border:1px solid var(--muted);padding:8px 15px;font-family:"Barlow Condensed",sans-serif;}
+  .job{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--rule);}
+  .job .del{background:none;border:none;color:var(--muted);font-size:15px;}
+  .total{display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--ink);}
+  .total .n{font-family:"Barlow Condensed",sans-serif;font-size:1.3rem;}
+
+  /* checklist */
+  .phase{margin-bottom:20px;}
+  .phase-title{display:flex;align-items:baseline;gap:9px;margin-bottom:6px;}
+  .phase-title h3{font-weight:400;font-size:1rem;margin:0;}
+  .phase-count{font-family:"Barlow Condensed",sans-serif;font-size:12px;color:var(--muted);}
+  .task{display:flex;align-items:flex-start;gap:11px;padding:7px 0;border-top:1px solid var(--rule);}
+  .box{flex:0 0 auto;width:17px;height:17px;margin-top:3px;border:1px solid var(--muted);background:transparent;padding:0;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;}
+  .box[aria-pressed="true"]{border-color:var(--done);color:var(--done);}
+  .task[data-done="true"] .txt{color:var(--muted);text-decoration:line-through;}
+  .task .note{display:block;color:var(--muted);font-size:.82rem;text-decoration:none;}
+
+  footer{padding:22px 0 56px;display:flex;gap:18px;flex-wrap:wrap;}
+  footer button{background:none;border:none;color:var(--muted);font-family:"Barlow Condensed",sans-serif;letter-spacing:.08em;font-size:13px;padding:0;}
+  footer button:hover{color:var(--ink);}
+
+  @media (max-width:640px){
+    .counters{grid-template-columns:1fr;}
+    .lead{grid-template-columns:1fr auto;row-gap:6px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= GATE ================= -->
+<div id="gate">
+  <div class="gatebox">
+    <div class="mark">GOAT0FCRYPTO</div>
+    <input id="pw" type="password" autocomplete="current-password" placeholder="Passwort" autofocus>
+    <button id="unlock">Öffnen</button>
+    <div id="gateMsg"></div>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" class="hidden">
+
+<header>
+  <div class="wrap masthead">
+    <span class="mark">LAUNCH TRACKER</span>
+    <span id="status"></span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="overall">
+    <h1>Von der Seite zum ersten Auftrag</h1>
+    <p class="sub">Der Engpass ist die Anzahl der Mails. Alles andere ist Vorbereitung.</p>
+    <div class="bar"><span id="overallBar"></span></div>
+    <div class="barline">
+      <span class="label" id="overallText">—</span>
+      <span class="label" id="overallPct">0 %</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="sechead"><h2>OUTREACH</h2></div>
+    <div class="counters">
+      <div class="counter">
+        <div class="label">MAILS RAUS</div>
+        <div class="n" id="cSent">0</div>
+        <div class="goal">Ziel: 100</div>
+        <div class="btns">
+          <button data-k="sent" data-d="-1">−</button>
+          <button data-k="sent" data-d="1">+1</button>
+          <button data-k="sent" data-d="5">+5</button>
+        </div>
+      </div>
+      <div class="counter">
+        <div class="label">ANTWORTEN</div>
+        <div class="n" id="cReplies">0</div>
+        <div class="goal">erwartbar 5–10 %</div>
+        <div class="btns">
+          <button data-k="replies" data-d="-1">−</button>
+          <button data-k="replies" data-d="1">+1</button>
+        </div>
+      </div>
+      <div class="counter">
+        <div class="label">GESPRÄCHE</div>
+        <div class="n" id="cCalls">0</div>
+        <div class="goal">konkrete Anfragen</div>
+        <div class="btns">
+          <button data-k="calls" data-d="-1">−</button>
+          <button data-k="calls" data-d="1">+1</button>
+        </div>
+      </div>
+    </div>
+    <p class="ratio" id="ratio"></p>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>LEADS</h2><span class="label" id="dueCount"></span></div>
+    <div class="leadform">
+      <input class="nm" id="lName" placeholder="Projekt" maxlength="60">
+      <input class="ch" id="lChannel" placeholder="Kanal" maxlength="30">
+      <button id="lAdd">Eintragen</button>
+    </div>
+    <div id="leads"></div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>AUFTRÄGE</h2></div>
+    <div class="jobform">
+      <input class="cl" id="jClient" placeholder="Kunde" maxlength="60">
+      <input class="am" id="jAmount" placeholder="€" inputmode="decimal" maxlength="9">
+      <button id="jAdd">Eintragen</button>
+    </div>
+    <div id="jobs"></div>
+    <div class="total"><span class="label">GESAMT</span><span class="n" id="jTotal">0 €</span></div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>SETUP</h2></div>
+    <div id="phases"></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <button id="export">Backup exportieren</button>
+  <button id="import">Backup einlesen</button>
+  <button id="lock">Sperren</button>
+  <button id="reset">Alles löschen</button>
+</footer>
+<input type="file" id="importFile" accept="application/json" class="hidden">
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var LS = "goc_t_v1";
+  var PHASES = [
+    { id:"p1", title:"Fundament", tasks:[
+      { id:"t1", txt:"Impressum auf allen Seiten" },
+      { id:"t2", txt:"Seite live" },
+      { id:"t3", txt:"Mailadresse getestet", note:"Testmail hin und zurück" },
+      { id:"t4", txt:"SPF, DKIM, DMARC geprüft", note:"mail-tester.com, Ziel über 8/10" },
+      { id:"t5", txt:"Gewerbe angemeldet", note:"vor der ersten Rechnung" }
+    ]},
+    { id:"p2", title:"Arbeitsproben", tasks:[
+      { id:"t6", txt:"Research-Stück online" },
+      { id:"t7", txt:"Newsletter online", note:"Zahlen gegenprüfen" },
+      { id:"t8", txt:"Product Copy online" },
+      { id:"t9", txt:"Thread gepostet und gepinnt" }
+    ]},
+    { id:"p3", title:"Erster Umsatz", tasks:[
+      { id:"t10", txt:"Erste Antwort erhalten" },
+      { id:"t11", txt:"Erstes Angebot verschickt", note:"Festpreis, 50 % vorab" },
+      { id:"t12", txt:"Erster Auftrag geliefert" },
+      { id:"t13", txt:"Retainer angeboten" }
+    ]}
+  ];
+  var STATUSES = ["offen","Follow-up","Antwort","Angebot","Auftrag","abgelehnt"];
+
+  var DEFAULT = { done:{}, sent:0, replies:0, calls:0, leads:[], jobs:[] };
+  var state = null, key = null, saveTimer = null;
+
+  var enc = new TextEncoder(), dec = new TextDecoder();
+  function b64(buf){ return btoa(String.fromCharCode.apply(null, new Uint8Array(buf))); }
+  function unb64(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); }
+
+  function deriveKey(pw, salt){
+    return crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"])
+      .then(function(base){
+        return crypto.subtle.deriveKey(
+          { name:"PBKDF2", salt: salt, iterations: 250000, hash:"SHA-256" },
+          base, { name:"AES-GCM", length:256 }, false, ["encrypt","decrypt"]
+        );
+      });
+  }
+
+  function encryptState(){
+    var iv = crypto.getRandomValues(new Uint8Array(12));
+    return crypto.subtle.encrypt({name:"AES-GCM", iv:iv}, key, enc.encode(JSON.stringify(state)))
+      .then(function(ct){
+        var box = JSON.parse(localStorage.getItem(LS) || "{}");
+        box.iv = b64(iv);
+        box.data = b64(ct);
+        localStorage.setItem(LS, JSON.stringify(box));
+      });
+  }
+
+  function save(){
+    if (!key) return;
+    clearTimeout(saveTimer);
+    setStatus("…");
+    saveTimer = setTimeout(function(){
+      encryptState().then(function(){ setStatus("gespeichert"); })
+                    .catch(function(){ setStatus("Fehler beim Speichern"); });
+    }, 350);
+  }
+
+  function setStatus(t){ var e = document.getElementById("status"); if (e) e.textContent = t; }
+  function gateMsg(t, err){
+    var m = document.getElementById("gateMsg");
+    m.textContent = t || "";
+    m.className = err ? "err" : "";
+  }
+
+  /* ---------------- unlock ---------------- */
+
+  function unlock(){
+    var pw = document.getElementById("pw").value;
+    if (pw.length < 6) { gateMsg("Mindestens 6 Zeichen.", true); return; }
+    gateMsg("Entschlüssle …");
+
+    var box = null;
+    try { box = JSON.parse(localStorage.getItem(LS) || "null"); } catch(e){}
+
+    if (!box || !box.salt){
+      // first run on this browser
+      var salt = crypto.getRandomValues(new Uint8Array(16));
+      deriveKey(pw, salt).then(function(k){
+        key = k;
+        state = JSON.parse(JSON.stringify(DEFAULT));
+        localStorage.setItem(LS, JSON.stringify({ salt: b64(salt) }));
+        return encryptState();
+      }).then(function(){
+        gateMsg("");
+        openApp();
+        setStatus("neu angelegt");
+      }).catch(function(e){
+        gateMsg("Fehler: " + e.message, true);
+      });
+      return;
+    }
+
+    deriveKey(pw, unb64(box.salt)).then(function(k){
+      key = k;
+      return crypto.subtle.decrypt(
+        { name:"AES-GCM", iv: unb64(box.iv) }, k, unb64(box.data)
+      );
+    }).then(function(plain){
+      state = Object.assign({}, DEFAULT, JSON.parse(dec.decode(plain)));
+      gateMsg("");
+      openApp();
+      setStatus("entsperrt");
+    }).catch(function(){
+      key = null;
+      gateMsg("Falsches Passwort.", true);
+      document.getElementById("pw").select();
+    });
+  }
+
+  function openApp(){
+    document.getElementById("gate").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+    document.getElementById("pw").value = "";
+    renderAll();
+  }
+
+  document.getElementById("unlock").addEventListener("click", unlock);
+  document.getElementById("pw").addEventListener("keydown", function(e){
+    if (e.key === "Enter") unlock();
+  });
+
+  /* ---------------- rendering ---------------- */
+
+  function totalTasks(){ return PHASES.reduce(function(n,p){ return n+p.tasks.length; },0); }
+  function doneCount(){
+    var n=0; PHASES.forEach(function(p){ p.tasks.forEach(function(t){ if(state.done[t.id]) n++; }); }); return n;
+  }
+
+  function renderOverall(){
+    var d=doneCount(), t=totalTasks(), pct = t ? Math.round(d/t*100) : 0;
+    document.getElementById("overallBar").style.width = pct+"%";
+    document.getElementById("overallText").textContent = d+" von "+t+" Schritten";
+    document.getElementById("overallPct").textContent = pct+" %";
+  }
+
+  function renderCounters(){
+    document.getElementById("cSent").textContent = state.sent;
+    document.getElementById("cReplies").textContent = state.replies;
+    document.getElementById("cCalls").textContent = state.calls;
+    var r = document.getElementById("ratio");
+    if (state.sent < 10){
+      r.textContent = "Unter 20 Mails ohne Antwort ist normal. Weitermachen.";
+    } else {
+      var p = state.replies/state.sent*100;
+      r.textContent = "Antwortquote: "+p.toFixed(1)+" % · "+
+        (p >= 5 ? "im erwartbaren Bereich." : "unter 5 % — Betreff und erste Zeile überarbeiten.");
+    }
+  }
+
+  function daysBetween(a,b){ return Math.round((b-a)/86400000); }
+
+  function renderLeads(){
+    var root = document.getElementById("leads");
+    root.textContent = "";
+    var due = 0, today = new Date();
+
+    if (!state.leads.length){
+      var e = document.createElement("p");
+      e.className = "empty";
+      e.textContent = "Noch keine Leads eingetragen.";
+      root.appendChild(e);
+    }
+
+    state.leads.forEach(function(l, i){
+      var row = document.createElement("div");
+      row.className = "lead";
+
+      var left = document.createElement("div");
+      var nm = document.createElement("span");
+      nm.textContent = l.name;
+      var meta = document.createElement("span");
+      meta.className = "meta";
+      meta.textContent = (l.channel ? l.channel+" · " : "") + "angeschrieben " + l.sent;
+      left.appendChild(nm); left.appendChild(meta);
+
+      var sel = document.createElement("select");
+      STATUSES.forEach(function(s){
+        var o = document.createElement("option");
+        o.value = s; o.textContent = s;
+        if (l.status === s) o.selected = true;
+        sel.appendChild(o);
+      });
+      sel.addEventListener("change", function(){
+        l.status = sel.value; renderLeads(); save();
+      });
+
+      var dueEl = document.createElement("span");
+      dueEl.className = "due";
+      if (l.status === "offen" && l.sent){
+        var d = daysBetween(new Date(l.sent), today);
+        if (d >= 6){ dueEl.textContent = "Follow-up fällig"; dueEl.classList.add("now"); due++; }
+        else { dueEl.textContent = "in " + (6-d) + "d"; }
+      }
+
+      var del = document.createElement("button");
+      del.className = "del"; del.textContent = "×";
+      del.setAttribute("aria-label","löschen");
+      del.addEventListener("click", function(){
+        state.leads.splice(i,1); renderLeads(); save();
+      });
+
+      row.appendChild(left); row.appendChild(sel); row.appendChild(dueEl); row.appendChild(del);
+      root.appendChild(row);
+    });
+
+    document.getElementById("dueCount").textContent = due ? due + " FOLLOW-UP FÄLLIG" : "";
+  }
+
+  function fmt(n){
+    return (Number(n)||0).toLocaleString("de-AT",{maximumFractionDigits:0}) + " €";
+  }
+
+  function renderJobs(){
+    var root = document.getElementById("jobs");
+    root.textContent = "";
+    if (!state.jobs.length){
+      var e=document.createElement("p"); e.className="empty";
+      e.textContent="Noch keine Aufträge."; root.appendChild(e);
+    }
+    state.jobs.forEach(function(j,i){
+      var row=document.createElement("div"); row.className="job";
+      var l=document.createElement("span"); l.textContent=j.client;
+      var r=document.createElement("span");
+      var a=document.createElement("span"); a.textContent=fmt(j.amount)+"  ";
+      var d=document.createElement("button"); d.className="del"; d.textContent="×";
+      d.addEventListener("click", function(){ state.jobs.splice(i,1); renderJobs(); save(); });
+      r.appendChild(a); r.appendChild(d);
+      row.appendChild(l); row.appendChild(r); root.appendChild(row);
+    });
+    var t = state.jobs.reduce(function(s,j){ return s+(Number(j.amount)||0); },0);
+    document.getElementById("jTotal").textContent = fmt(t);
+  }
+
+  function renderPhases(){
+    var root = document.getElementById("phases");
+    root.textContent = "";
+    PHASES.forEach(function(p){
+      var done = p.tasks.filter(function(t){ return state.done[t.id]; }).length;
+      var wrap = document.createElement("div"); wrap.className="phase";
+      var head = document.createElement("div"); head.className="phase-title";
+      var h3 = document.createElement("h3"); h3.textContent = p.title;
+      var c = document.createElement("span"); c.className="phase-count"; c.textContent = done+"/"+p.tasks.length;
+      head.appendChild(h3); head.appendChild(c); wrap.appendChild(head);
+
+      p.tasks.forEach(function(t){
+        var isDone = !!state.done[t.id];
+        var row = document.createElement("div"); row.className="task";
+        row.setAttribute("data-done", isDone?"true":"false");
+        var b = document.createElement("button"); b.className="box";
+        b.setAttribute("aria-pressed", isDone?"true":"false");
+        b.setAttribute("aria-label", t.txt);
+        b.textContent = isDone ? "✓" : "";
+        b.addEventListener("click", function(){
+          if (state.done[t.id]) delete state.done[t.id]; else state.done[t.id]=true;
+          renderPhases(); renderOverall(); save();
+        });
+        var txt = document.createElement("div"); txt.className="txt";
+        txt.appendChild(document.createTextNode(t.txt));
+        if (t.note){
+          var n=document.createElement("span"); n.className="note"; n.textContent=t.note;
+          txt.appendChild(n);
+        }
+        row.appendChild(b); row.appendChild(txt); wrap.appendChild(row);
+      });
+      root.appendChild(wrap);
+    });
+  }
+
+  function renderAll(){ renderOverall(); renderCounters(); renderLeads(); renderJobs(); renderPhases(); }
+
+  /* ---------------- actions ---------------- */
+
+  document.querySelectorAll(".btns button").forEach(function(b){
+    b.addEventListener("click", function(){
+      var k=b.getAttribute("data-k"), d=parseInt(b.getAttribute("data-d"),10);
+      state[k] = Math.max(0,(state[k]||0)+d);
+      renderCounters(); save();
+    });
+  });
+
+  function addLead(){
+    var n=document.getElementById("lName"), c=document.getElementById("lChannel");
+    if(!n.value.trim()) return;
+    state.leads.unshift({
+      name:n.value.trim(), channel:c.value.trim(),
+      sent:new Date().toISOString().slice(0,10), status:"offen"
+    });
+    n.value=""; c.value=""; renderLeads(); save(); n.focus();
+  }
+  document.getElementById("lAdd").addEventListener("click", addLead);
+  ["lName","lChannel"].forEach(function(id){
+    document.getElementById(id).addEventListener("keydown", function(e){ if(e.key==="Enter") addLead(); });
+  });
+
+  function addJob(){
+    var c=document.getElementById("jClient"), a=document.getElementById("jAmount");
+    var amt=parseFloat(String(a.value).replace(",","."));
+    if(!c.value.trim() || !isFinite(amt) || amt<=0) return;
+    state.jobs.push({client:c.value.trim(), amount:amt, at:new Date().toISOString()});
+    c.value=""; a.value=""; renderJobs(); save(); c.focus();
+  }
+  document.getElementById("jAdd").addEventListener("click", addJob);
+  ["jClient","jAmount"].forEach(function(id){
+    document.getElementById(id).addEventListener("keydown", function(e){ if(e.key==="Enter") addJob(); });
+  });
+
+  document.getElementById("export").addEventListener("click", function(){
+    var blob = new Blob([JSON.stringify(state,null,2)], {type:"application/json"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "tracker-backup-" + new Date().toISOString().slice(0,10) + ".json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  document.getElementById("import").addEventListener("click", function(){
+    document.getElementById("importFile").click();
+  });
+  document.getElementById("importFile").addEventListener("change", function(e){
+    var f = e.target.files[0]; if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try {
+        state = Object.assign({}, DEFAULT, JSON.parse(r.result));
+        renderAll(); save(); setStatus("Backup eingelesen");
+      } catch(err){ setStatus("Backup unlesbar"); }
+    };
+    r.readAsText(f);
+    e.target.value = "";
+  });
+
+  document.getElementById("lock").addEventListener("click", function(){
+    key = null; state = null;
+    document.getElementById("app").classList.add("hidden");
+    document.getElementById("gate").classList.remove("hidden");
+    document.getElementById("pw").focus();
+  });
+
+  document.getElementById("reset").addEventListener("click", function(){
+    if(!confirm("Alle Daten unwiderruflich löschen?")) return;
+    localStorage.removeItem(LS);
+    key=null; state=null;
+    location.reload();
+  });
+
+})();
+</script>
+
+</body>
+</html>
