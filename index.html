@@ -110,25 +110,40 @@
   .sec-head .rule-mark{font-size:15px;}
 
   /* ---------- work ---------- */
-  .piece{
-    display:grid;
-    grid-template-columns:150px minmax(0,1fr);
-    gap:30px;
-    padding:24px 0;
-    text-decoration:none;
+  .group{margin-bottom:46px;}
+  .group:last-child{margin-bottom:0;}
+  .grouplabel{
+    font-family:"Barlow Condensed",sans-serif;
+    font-weight:400;
+    font-size:15px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0;
+    padding-bottom:10px;
     border-bottom:1px solid var(--rule);
   }
-  .piece:last-of-type{border-bottom:none;}
-  .kind{
-    font-family:"Barlow Condensed",sans-serif;
-    font-size:15px;
-    letter-spacing:.1em;
-    color:var(--muted);
-    padding-top:6px;
+  .piece{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 90px;
+    gap:24px;
+    padding:20px 0;
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    align-items:baseline;
   }
-  .piece h3{font-weight:400;font-size:1.32rem;margin:0 0 8px;line-height:1.32;}
+  .group .piece:last-of-type{border-bottom:none;}
+  .piece h3{font-weight:400;font-size:1.28rem;margin:0 0 7px;line-height:1.32;}
   .piece:hover h3{text-decoration:underline;text-underline-offset:4px;}
-  .piece p{margin:0;color:var(--muted);max-width:60ch;font-size:.97rem;}
+  .piece p{margin:0;color:var(--muted);max-width:62ch;font-size:.97rem;}
+  .date{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:14px;
+    letter-spacing:.08em;
+    color:var(--muted);
+    text-align:right;
+    white-space:nowrap;
+  }
 
   /* ---------- services ---------- */
   .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;}
@@ -153,14 +168,16 @@
   .contact a.mail{font-size:1.06rem;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:3px;}
 
   /* ---------- footer ---------- */
-  footer{padding:44px 0 64px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem;}
-  footer p{margin:0 0 10px;max-width:64ch;}
+  footer{padding:34px 0 60px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem;}
+  footer p{margin:0;}
+  footer a{text-decoration:none;border-bottom:1px solid var(--rule);}
+  footer a:hover{border-color:var(--ink);color:var(--ink);}
 
   @media (max-width:780px){
     .hero{padding:64px 0 56px;}
     .services{grid-template-columns:1fr;gap:28px;}
-    .piece{grid-template-columns:1fr;gap:8px;}
-    .kind{padding-top:0;}
+    .piece{grid-template-columns:1fr;gap:6px;}
+    .date{text-align:left;}
     .contact{padding:34px 24px;}
   }
 </style>
@@ -192,37 +209,57 @@
     <section id="writing">
       <h2 class="sec-head"><span class="rule-mark">SELECTED WORK</span></h2>
 
-      <a class="piece" href="/liquid">
-        <span class="kind">PROTOCOL RESEARCH</span>
-        <div>
-          <h3>Nobody stole a key</h3>
-          <p>Liquid lost 95 % of its Bitcoin reserve with every signature valid and every threshold met. What that says about federated custody.</p>
-        </div>
-      </a>
-      
-      <a class="piece" href="/ethena">
-        <span class="kind">PROTOCOL RESEARCH</span>
-        <div>
-          <h3>The dollar that pays you, and what it costs</h3>
-          <p>How Ethena's USDe generates yield, what has already been stress-tested, and where the real risk sits.</p>
-        </div>
-      </a>
+      <div class="group">
+        <h3 class="grouplabel">Research</h3>
 
-      <a class="piece" href="/newsletter">
-        <span class="kind">NEWSLETTER</span>
-        <div>
-          <h3>The unlock nobody claimed</h3>
-          <p>A hawkish jobs print the market shrugged off, an $820 million unlock that mostly wasn't, and what both say about who is driving this rally.</p>
-        </div>
-      </a>
+        <a class="piece" href="/treasuries">
+          <div>
+            <h3>Paid in your own paper</h3>
+            <p>Over 100 projects wound down in H1 2026, almost none from fraud. The mechanism was on the balance sheet all along — and 42 % of DAOs still have it.</p>
+          </div>
+          <span class="date">Sep 2026</span>
+        </a>
 
-      <a class="piece" href="/product-copy">
-        <span class="kind">PRODUCT COPY</span>
-        <div>
-          <h3>Pendle's landing page, rewritten</h3>
-          <p>The largest yield-trading venue in crypto has a homepage that never explains what yield trading is. A line-by-line rewrite.</p>
-        </div>
-      </a>
+        <a class="piece" href="/liquid">
+          <div>
+            <h3>Nobody stole a key</h3>
+            <p>Liquid lost 95 % of its Bitcoin reserve with every signature valid and every threshold met. What that says about federated custody.</p>
+          </div>
+          <span class="date">Sep 2026</span>
+        </a>
+
+        <a class="piece" href="/ethena">
+          <div>
+            <h3>The dollar that pays you, and what it costs</h3>
+            <p>How Ethena's USDe generates yield, what has already been stress-tested, and where the real risk sits.</p>
+          </div>
+          <span class="date">Sep 2026</span>
+        </a>
+      </div>
+
+      <div class="group">
+        <h3 class="grouplabel">Newsletter</h3>
+
+        <a class="piece" href="/newsletter">
+          <div>
+            <h3>The unlock nobody claimed</h3>
+            <p>A hawkish jobs print the market shrugged off, an $820 million unlock that mostly wasn't, and what both say about who is driving this rally.</p>
+          </div>
+          <span class="date">Sep 2026</span>
+        </a>
+      </div>
+
+      <div class="group">
+        <h3 class="grouplabel">Product copy</h3>
+
+        <a class="piece" href="/product-copy">
+          <div>
+            <h3>Pendle's landing page, rewritten</h3>
+            <p>The largest yield-trading venue in crypto has a homepage that never explains what yield trading is. A line-by-line rewrite.</p>
+          </div>
+          <span class="date">Sep 2026</span>
+        </a>
+      </div>
     </section>
 
     <section id="services">
