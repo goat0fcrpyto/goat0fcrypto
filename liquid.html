@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nobody stole a key — GOAT0FCRYPTO</title>
+<meta name="description" content="Liquid lost 95% of its Bitcoin reserve without a single key being compromised. What that says about federated custody, and about what confidentiality costs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--ground:#0C0C0C;--raised:#141414;--ink:#EFEFED;--muted:#8C8C88;--rule:#2A2A29;}
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:"Spectral",Georgia,serif;font-size:18px;font-weight:300;line-height:1.72;}
+  a{color:inherit;}
+  a:focus-visible{outline:1px solid var(--ink);outline-offset:4px;}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 26px;}
+  .rule-mark{display:inline-block;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:400;letter-spacing:.14em;line-height:1;text-decoration:none;white-space:nowrap;}
+  header{padding:30px 0 0;}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .masthead .rule-mark{font-size:19px;}
+  nav{display:flex;gap:26px;font-family:"Barlow Condensed",sans-serif;font-size:17px;letter-spacing:.08em;}
+  nav a{color:var(--muted);text-decoration:none;}
+  nav a:hover{color:var(--ink);}
+
+  article{max-width:660px;margin:0 auto;padding:78px 0 40px;}
+  .kicker{font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.12em;color:var(--muted);margin:0 0 18px;}
+  article h1{font-weight:300;font-size:clamp(1.9rem,4.2vw,2.7rem);line-height:1.22;letter-spacing:-.01em;margin:0 0 22px;}
+  .standfirst{color:var(--muted);font-size:1.1rem;margin:0 0 44px;padding-bottom:34px;border-bottom:1px solid var(--rule);}
+  article h2{font-weight:400;font-size:1.35rem;line-height:1.3;margin:44px 0 14px;}
+  article p{margin:0 0 22px;}
+  article ul{margin:0 0 22px;padding-left:1.1em;}
+  article li{margin-bottom:10px;}
+  article strong{font-weight:500;}
+  .box{background:var(--raised);padding:20px 22px;margin:0 0 26px;}
+  .box p{margin:0 0 10px;font-size:.95rem;}
+  .box p:last-child{margin-bottom:0;}
+  .box .lbl{font-family:"Barlow Condensed",sans-serif;letter-spacing:.12em;font-size:14px;color:var(--muted);}
+  .endnote{margin-top:52px;padding-top:26px;border-top:1px solid var(--rule);color:var(--muted);font-size:.9rem;font-style:italic;}
+  .backlink{display:block;max-width:660px;margin:0 auto;padding:0 0 70px;font-family:"Barlow Condensed",sans-serif;letter-spacing:.08em;color:var(--muted);text-decoration:none;font-size:16px;}
+  .backlink:hover{color:var(--ink);}
+  footer{padding:34px 0 60px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem;}
+  footer p{margin:0;}
+  footer a{text-decoration:none;border-bottom:1px solid var(--rule);}
+  footer a:hover{border-color:var(--ink);color:var(--ink);}
+  @media (max-width:780px){article{padding:52px 0 30px;}body{font-size:17px;}.box{padding:16px 18px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap masthead">
+    <a class="rule-mark" href="/">GOAT0FCRYPTO</a>
+    <nav>
+      <a href="/#writing">Writing</a>
+      <a href="/#services">Services</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <article>
+    <p class="kicker">PROTOCOL RESEARCH</p>
+    <h1>Nobody stole a key</h1>
+    <p class="standfirst">Liquid lost 95 percent of its Bitcoin reserve in a single authorised withdrawal. Every signature was valid, every threshold was met, and the multisig did exactly what it was built to do. That is the interesting part.</p>
+
+    <p>On 6 September 2026, roughly 3,996 BTC left the Liquid Federation's peg wallet in one transaction. At the prices of that week it was about $320 million, and it took the reserve backing every L-BTC in circulation from around 4,205 BTC down to roughly 197. Blockstream disabled the bridge nodes within hours, exchanges suspended L-BTC deposits and withdrawals, and the sidechain stopped producing blocks the following morning.</p>
+
+    <p>Almost every write-up since has led with the number. The number is the least instructive thing about it.</p>
+
+    <h2>What actually failed</h2>
+
+    <p>A Liquid peg-out works in two steps. The user burns L-BTC on the sidechain, and the federation's watchmen then release the matching BTC on Bitcoin, but only to an address whitelisted in a Peg-out Authorization Key entry. Spending federation funds requires a multisig threshold above two thirds, and changes to the PAK whitelist take three days to take effect. Both of those controls are there to answer one question: what happens if some of the signers go bad, or some of the keys are stolen.</p>
+
+    <p>Neither happened. The vulnerability sat in Elements, the open-source software Liquid nodes run, in the way those nodes cached the results of range proof verification. The effect was that invalid L-BTC was accepted as valid at the transaction level — before any peg-out was requested. By the time the withdrawal reached the federation, it was a properly formed, properly authorised request to redeem L-BTC that the network believed existed. The watchmen signed it. The threshold was met. The destination was whitelisted.</p>
+
+    <p>The security model held perfectly and produced a catastrophe, because it was defending the wrong layer.</p>
+
+    <h2>The part that should generalise</h2>
+
+    <p>Federated systems are usually assessed on the strength of the federation: who the members are, how many signatures are needed, how hard it would be to collude. Liquid scores well on all of it — the members are established firms, the threshold is high, the whitelist has a delay.</p>
+
+    <p>None of that helps when every member validates the same way and the validation is wrong. A two-thirds threshold across fifteen signers running one implementation is not fifteen independent checks. It is one check, performed fifteen times, by design. Signature thresholds protect against dishonest signers. They do nothing against honest signers agreeing on a false premise.</p>
+
+    <p>This is the same shape as a consensus bug on a single-client chain, and it is worth noting how rarely bridge and sidechain risk gets discussed in those terms. The public debate is almost entirely about custody — who holds the keys, how many, under what governance. The failure that actually occurred was one layer below, in whether the system could correctly tell what existed.</p>
+
+    <h2>What confidentiality cost</h2>
+
+    <p>Here is the part I have not seen stated plainly.</p>
+
+    <p>Liquid's headline feature is Confidential Transactions: amounts are hidden on-chain. Hiding an amount while still proving it is neither negative nor inflated requires a range proof, and verifying range proofs is expensive, which is why nodes cache the results. The bug was in that cache.</p>
+
+    <p>On Bitcoin, checking that a transaction does not create coins from nothing is trivial — the amounts are in the clear and you add them up. On Liquid, that same check is a cryptographic proof with a performance optimisation in front of it. The optimisation is where the supply guarantee broke.</p>
+
+    <p>That is not an argument against confidential transactions. It is an argument for pricing them honestly: the privacy feature and the supply-integrity surface are the same machinery. Anyone assessing a chain with confidential amounts should be asking how supply is verified, who has reviewed that code, and whether more than one implementation exists. On Liquid, the answer to the last question is no.</p>
+
+    <h2>Where it stands</h2>
+
+    <div class="box">
+      <p class="lbl">TIMELINE</p>
+      <p><strong>6 Sept</strong> — ~3,996 BTC pegged out through SideSwap's PAK. Reserve falls to ~197 BTC. Bridge nodes disabled, sidechain paused. An on-chain message from the withdrawing party claims white-hat intent.</p>
+      <p><strong>7 Sept</strong> — 3,400 BTC returned to the federation. Around 598 BTC remains outstanding.</p>
+      <p><strong>9 Sept</strong> — Elements v23.3.4 released, hardening the cache keys used for range proofs. Reviewed internally and by outside teams including the Bitcoin Red Team and Alpen Labs.</p>
+      <p><strong>10 Sept</strong> — Block production resumes without user transactions. Peg-ins and peg-outs stay suspended. Published figures: 4,205 L-BTC in circulation against 3,597 BTC in reserve. Adam Back states publicly that the peg will be covered one to one.</p>
+      <p><strong>11 Sept</strong> — Peg-ins reopen at SideSwap. Peg-outs remain closed.</p>
+    </div>
+
+    <p>The gap between circulation and reserve is roughly 600 BTC, and Blockstream has said it will be covered rather than paid as ransom, with recovery pursued legally. Whether that holds is a solvency question with a known number attached, which is a far better position than the one the network was in on 7 September.</p>
+
+    <p>The operational point for anyone holding L-BTC is narrower and easier to miss: block production resuming is not redemption resuming. Until peg-outs are live, L-BTC cannot be converted back to BTC through the federation, and the market is free to price that gap however it likes. Other Liquid-issued assets, including USDT, were never affected.</p>
+
+    <h2>What I would take from it</h2>
+
+    <ul>
+      <li><strong>Ask what the threshold is defending.</strong> Multisig counts answer one threat — dishonest or compromised signers. They say nothing about whether the thing being signed is real.</li>
+      <li><strong>Count implementations, not signers.</strong> Fifteen nodes running one codebase is a single point of failure wearing a governance costume.</li>
+      <li><strong>Treat privacy features as supply-integrity surface.</strong> Wherever amounts are hidden, something must prove they add up. That proof is now part of your risk.</li>
+      <li><strong>Separate liveness from redeemability.</strong> A chain producing blocks and a chain honouring withdrawals are different claims, and the first is much easier to announce.</li>
+    </ul>
+
+    <p>Liquid will probably come through this. The bug is patched, most of the Bitcoin came back, and the remaining shortfall is small against Blockstream's balance sheet. But the reason it happened is not specific to Liquid, and the questions above go unasked on most of the bridges and sidechains holding client funds today.</p>
+
+    <p class="endnote">Analysis, not investment advice. Figures reflect public reporting and the federation's own updates as of mid-September 2026 and are still moving — verify current numbers before relying on them.</p>
+  </article>
+
+  <a class="backlink" href="/">← All writing</a>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="/legal">Legal notice &amp; Impressum</a> · Nothing on this site is investment advice.</p>
+  </div>
+</footer>
+
+</body>
+</html>
