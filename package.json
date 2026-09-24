@@ -1,0 +1,16 @@
+{
+  "name": "goat0fcrypto",
+  "version": "1.0.0",
+  "description": "Crypto research & writing - GOAT0FCRYPTO",
+  "private": true,
+  "scripts": {
+    "dev": "npx http-server . -p 3000",
+    "build": "echo 'Static site - no build step required'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
+  "keywords": ["crypto", "research", "web3"],
+  "author": "",
+  "license": "ISC"
+}
